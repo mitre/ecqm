@@ -9,7 +9,7 @@ import (
 // QualityReport is a representation of a calculation of an electronic
 // clinical quality measure
 type QualityReport struct {
-	ID              bson.ObjectId `bson:"_id,omitempty" json:"id,omitempty"`
+	ID              bson.ObjectId `bson:"_id" json:"id"`
 	NPI             string        `bson:"npi,omitempty" json:"npi,omitempty"`
 	CalculationTime time.Time     `bson:"calculation_time,omitempty" json:"calculationTime,omitempty"`
 	Status          Status        `bson:"status,omitempty" json:"status,omitempty"`

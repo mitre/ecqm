@@ -41,12 +41,12 @@ func CreateQualityReportHandler(db *mgo.Database) echo.HandlerFunc {
 		ed := c.Form("effectiveDate")
 		edInt, err := strconv.ParseInt(ed, 10, 32)
 		if err != nil {
-			return errors.New("Could not convert the effective date into an int32")
+			return c.String(http.StatusBadRequest, "Could not convert the effective date into an int32")
 		}
 		qualityReport.EffectiveDate = int32(edInt)
 		err = validator.Validate(qualityReport)
 		if err != nil {
-			return err
+			return c.String(http.StatusBadRequest, err.Error())
 		}
 		qualityReport.ID = bson.NewObjectId()
 		err = db.C("query_cache").Insert(qualityReport)
