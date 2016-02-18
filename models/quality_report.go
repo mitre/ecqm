@@ -1,8 +1,10 @@
 package models
 
 import (
+	"errors"
 	"time"
 
+	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -16,6 +18,51 @@ type QualityReport struct {
 	MeasureID       string        `bson:"measure_id,omitempty" json:"measureId,omitempty" validate:"nonzero"`
 	SubID           string        `bson:"sub_id,omitempty" json:"subId,omitempty"`
 	EffectiveDate   int32         `bson:"effective_date,omitempty" json:"effectiveDate,omitempty" validate:"nonzero"`
+}
+
+// FindQualityAndPopulateQualityReport will attempt to find a QualityReport in
+// the query_cache based on the measure id, sub id and effective date passed in.
+// If it finds the associated document in the database, it will return true
+// and populate the other fields in the QualityReport that is passed in.
+// Otherwise, it will return false, and the passed in QualityReport will remain
+// unchanged.
+func FindQualityAndPopulateQualityReport(db *mgo.Database, qr *QualityReport) (bool, error) {
+	query := bson.M{"measure_id": qr.MeasureID, "effective_date": qr.EffectiveDate}
+	if qr.SubID != "" {
+		query["sub_id"] = qr.SubID
+	}
+	q := db.C("query_cache").Find(query)
+	count, err := q.Count()
+	if err != nil {
+		return false, err
+	}
+	switch count {
+	case 0:
+		return false, nil
+	case 1:
+		err = q.One(qr)
+		if err != nil {
+			return false, err
+		}
+	default:
+		return false, errors.New("Found more than one quality report for this")
+	}
+	return true, nil
+}
+
+func FindOrCreateQualityReport(db *mgo.Database, qr *QualityReport) error {
+	exists, err := FindQualityAndPopulateQualityReport(db, qr)
+	if err != nil {
+		return err
+	}
+	if !exists {
+		qr.ID = bson.NewObjectId()
+		err = db.C("query_cache").Insert(qr)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 type Status struct {

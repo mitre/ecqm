@@ -15,4 +15,7 @@ type Measure struct {
 	ContinuousVariable bool          `bson:"continuous_variable" json:"continuousVariable"`
 	EpisodeOfCare      bool          `bson:"episode_of_care" json:"episodeOfCare"`
 	PopulationIDs      PopulationIDs `bson:"population_ids,omitempty" json:"populationIds,omitempty"`
+	SubID              string        `bson:"sub_id,omitempty" json:"subId,omitempty"`
+	Subtitle           string        `bson:"subtitle,omitempty" json:"subtitle,omitempty"`
+	ShortSubtitle      string        `bson:"short_subtitle,omitempty" json:"shortSubtitle,omitempty"`
 }
