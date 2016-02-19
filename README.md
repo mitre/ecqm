@@ -1,4 +1,4 @@
-# ecqm
+# ecqm [![Build Status](https://api.travis-ci.org/mitre/ecqm.svg)](https://travis-ci.org/mitre/ecqm)
 
 This project contains the components to serve information about electronic
 Clinical Quality Measures. It is assumed that this project will be used with the
