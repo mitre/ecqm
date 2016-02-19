@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"errors"
 	"net/http"
 	"strconv"
 
@@ -20,13 +19,16 @@ func ShowQualityReportHandler(db *mgo.Database) echo.HandlerFunc {
 		if bson.IsObjectIdHex(idString) {
 			id = bson.ObjectIdHex(idString)
 		} else {
-			return errors.New("Invalid id")
+			return c.String(http.StatusBadRequest, "Invalid ID")
 		}
 
 		queryCache := db.C("query_cache")
 		qualityReport := &models.QualityReport{}
 		err := queryCache.FindId(id).One(qualityReport)
 		if err != nil {
+			if err == mgo.ErrNotFound {
+				return c.String(http.StatusNotFound, "Not found")
+			}
 			return err
 		}
 		return c.JSON(http.StatusOK, qualityReport)
@@ -48,11 +50,10 @@ func CreateQualityReportHandler(db *mgo.Database) echo.HandlerFunc {
 		if err != nil {
 			return c.String(http.StatusBadRequest, err.Error())
 		}
-		qualityReport.ID = bson.NewObjectId()
-		err = db.C("query_cache").Insert(qualityReport)
+		err = models.FindOrCreateQualityReport(db, qualityReport)
 		if err != nil {
 			return err
 		}
-		return c.JSON(http.StatusCreated, qualityReport)
+		return c.JSON(http.StatusOK, qualityReport)
 	}
 }
