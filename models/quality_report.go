@@ -57,6 +57,7 @@ func FindOrCreateQualityReport(db *mgo.Database, qr *QualityReport) error {
 	}
 	if !exists {
 		qr.ID = bson.NewObjectId()
+		qr.Status = Status{State: "requested"}
 		err = db.C("query_cache").Insert(qr)
 		if err != nil {
 			return err
