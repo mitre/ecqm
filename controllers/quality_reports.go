@@ -31,7 +31,6 @@ func ShowQualityReportHandler(db *mgo.Database) echo.HandlerFunc {
 			}
 			return err
 		}
-		c.Response().Header().Add("Access-Control-Allow-Origin", "http://localhost:9005")
 		return c.JSON(http.StatusOK, qualityReport)
 	}
 }
@@ -55,7 +54,6 @@ func CreateQualityReportHandler(db *mgo.Database) echo.HandlerFunc {
 		if err != nil {
 			return err
 		}
-		c.Response().Header().Add("Access-Control-Allow-Origin", "http://localhost:9005")
 		return c.JSON(http.StatusOK, qualityReport)
 	}
 }

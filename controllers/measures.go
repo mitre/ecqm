@@ -30,7 +30,6 @@ func IndexMeasureHandler(db *mgo.Database) echo.HandlerFunc {
 		if err != nil {
 			return err
 		}
-		c.Response().Header().Add("Access-Control-Allow-Origin", "http://localhost:9005")
 		return c.JSON(http.StatusOK, measures)
 	}
 }
