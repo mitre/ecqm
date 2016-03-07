@@ -11,13 +11,14 @@ import (
 // QualityReport is a representation of a calculation of an electronic
 // clinical quality measure
 type QualityReport struct {
-	ID              bson.ObjectId `bson:"_id" json:"id"`
-	NPI             string        `bson:"npi,omitempty" json:"npi,omitempty"`
-	CalculationTime time.Time     `bson:"calculation_time,omitempty" json:"calculationTime,omitempty"`
-	Status          Status        `bson:"status,omitempty" json:"status,omitempty"`
-	MeasureID       string        `bson:"measure_id,omitempty" json:"measureId,omitempty" validate:"nonzero"`
-	SubID           string        `bson:"sub_id,omitempty" json:"subId,omitempty"`
-	EffectiveDate   int32         `bson:"effective_date,omitempty" json:"effectiveDate,omitempty" validate:"nonzero"`
+	ID              bson.ObjectId       `bson:"_id" json:"id"`
+	NPI             string              `bson:"npi,omitempty" json:"npi,omitempty"`
+	CalculationTime time.Time           `bson:"calculation_time,omitempty" json:"calculationTime,omitempty"`
+	Status          Status              `bson:"status,omitempty" json:"status,omitempty"`
+	MeasureID       string              `bson:"measure_id,omitempty" json:"measureId,omitempty" validate:"nonzero"`
+	SubID           string              `bson:"sub_id,omitempty" json:"subId,omitempty"`
+	EffectiveDate   int32               `bson:"effective_date,omitempty" json:"effectiveDate,omitempty" validate:"nonzero"`
+	Result          QualityReportResult `bson:"result" json:"result"`
 }
 
 // FindQualityAndPopulateQualityReport will attempt to find a QualityReport in
@@ -74,11 +75,11 @@ type Status struct {
 type QualityReportResult struct {
 	PopulationIDs            PopulationIDs `bson:"population_ids,omitempty" json:"populationIds,omitempty"`
 	InitialPatientPopulation int32         `bson:"IPP" json:"initialPatientPopulation"`
-	Denominator              int32         `bson:"DENOM,omitempty" json:"denominator,omitempty"`
-	Exception                int32         `bson:"DENEXCP,omitempty" json:"exception,omitempty"`
-	Exclusion                int32         `bson:"DENEX,omitempty" json:"exclusion,omitempty"`
-	Numerator                int32         `bson:"NUMER,omitempty" json:"numerator,omitempty"`
-	AntiNumerator            int32         `bson:"antinumerator,omitempty" json:"antinumerator,omitempty"`
+	Denominator              int32         `bson:"DENOM,omitempty" json:"denominator"`
+	Exception                int32         `bson:"DENEXCP,omitempty" json:"exception"`
+	Exclusion                int32         `bson:"DENEX,omitempty" json:"exclusion"`
+	Numerator                int32         `bson:"NUMER,omitempty" json:"numerator"`
+	AntiNumerator            int32         `bson:"antinumerator,omitempty" json:"antinumerator"`
 	MeasurePopulation        int32         `bson:"MSRPOPL,omitempty" json:"measurePopulation,omitempty"`
 	Observation              float32       `bson:"OBSERV,omitempty" json:"Observation,omitempty"`
 }
