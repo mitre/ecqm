@@ -4,8 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
+	"github.com/gin-gonic/gin"
 	"github.com/mitre/ecqm/controllers"
 	"gopkg.in/mgo.v2"
 )
@@ -19,22 +18,21 @@ func main() {
 		return
 	}
 
-	e := echo.New()
+	e := gin.Default()
 	session, err := mgo.Dial("localhost")
 	if err != nil {
 		panic(err)
 	}
 	db := session.DB("fhir")
 
-	e.Get("/QualityReport/:id", controllers.ShowQualityReportHandler(db))
-	e.Post("/QualityReport", controllers.CreateQualityReportHandler(db))
+	e.GET("/QualityReport/:id", controllers.ShowQualityReportHandler(db))
+	e.POST("/QualityReport", controllers.CreateQualityReportHandler(db))
 
-	e.Get("/Measure/:id", controllers.ShowMeasureHandler(db))
-	e.Get("/Measure", controllers.IndexMeasureHandler(db))
-	e.Get("/UserInfo", controllers.UserInfo)
+	e.GET("/Measure/:id", controllers.ShowMeasureHandler(db))
+	e.GET("/Measure", controllers.IndexMeasureHandler(db))
+	e.GET("/UserInfo", controllers.UserInfo)
 
-	e.Index(fmt.Sprintf("%s/index.html", *assetPath))
+	e.StaticFile("/", fmt.Sprintf("%s/index.html", *assetPath))
 	e.Static("/assets", fmt.Sprintf("%s/assets", *assetPath))
-	e.Use(middleware.Logger())
 	e.Run(":3001")
 }

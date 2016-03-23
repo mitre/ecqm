@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/labstack/echo"
+	"github.com/gin-gonic/gin"
 	"github.com/matryer/silk/runner"
 	"github.com/mitre/ecqm/models"
 
@@ -17,8 +17,8 @@ import (
 
 type QualityReportSuite struct {
 	DBServer *dbtest.DBServer
+	Engine   *gin.Engine
 	Database *mgo.Database
-	Echo     *echo.Echo
 }
 
 var _ = Suite(&QualityReportSuite{})
@@ -35,14 +35,14 @@ func (q *QualityReportSuite) SetUpSuite(c *C) {
 	id := bson.ObjectIdHex("56bd06841cd462774f2af485")
 	qr.ID = id
 	q.Database.C("query_cache").Insert(qr)
-	e := echo.New()
-	e.Get("/QualityReport/:id", ShowQualityReportHandler(q.Database))
-	e.Post("/QualityReport", CreateQualityReportHandler(q.Database))
-	q.Echo = e
+	e := gin.New()
+	e.GET("/QualityReport/:id", ShowQualityReportHandler(q.Database))
+	e.POST("/QualityReport", CreateQualityReportHandler(q.Database))
+	q.Engine = e
 }
 
 func (q *QualityReportSuite) TestAPI(c *C) {
-	s := httptest.NewServer(q.Echo)
+	s := httptest.NewServer(q.Engine)
 	defer s.Close()
 	runner.New(c, s.URL).RunGlob(filepath.Glob("../api_doc/*.silk.md"))
 }
