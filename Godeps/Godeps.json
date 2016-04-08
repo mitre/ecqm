@@ -1,0 +1,154 @@
+{
+	"ImportPath": "github.com/mitre/ecqm",
+	"GoVersion": "go1.6",
+	"Packages": [
+		"github.com/mitre/ecqm",
+		"github.com/mitre/ecqm/controllers",
+		"github.com/mitre/ecqm/models"
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/Sirupsen/logrus",
+			"Comment": "v0.10.0",
+			"Rev": "4b6ea7319e214d98c938f12692336f7ca9348d6b"
+		},
+		{
+			"ImportPath": "github.com/gin-gonic/gin",
+			"Comment": "v1.0rc1-248-g4a6bc4a",
+			"Rev": "4a6bc4aac4607e253bcda67c8c5bcda693d2388e"
+		},
+		{
+			"ImportPath": "github.com/gin-gonic/gin/binding",
+			"Comment": "v1.0rc1-248-g4a6bc4a",
+			"Rev": "4a6bc4aac4607e253bcda67c8c5bcda693d2388e"
+		},
+		{
+			"ImportPath": "github.com/gin-gonic/gin/render",
+			"Comment": "v1.0rc1-248-g4a6bc4a",
+			"Rev": "4a6bc4aac4607e253bcda67c8c5bcda693d2388e"
+		},
+		{
+			"ImportPath": "github.com/golang/protobuf/proto",
+			"Rev": "8d92cf5fc15a4382f8964b08e1f42a75c0591aa3"
+		},
+		{
+			"ImportPath": "github.com/intervention-engine/fhir/models",
+			"Comment": "DSTU1-138-g10c91ea",
+			"Rev": "10c91ea9d0d780db283217abf86223e38e7f6e4f"
+		},
+		{
+			"ImportPath": "github.com/intervention-engine/fhir/search",
+			"Comment": "DSTU1-138-g10c91ea",
+			"Rev": "10c91ea9d0d780db283217abf86223e38e7f6e4f"
+		},
+		{
+			"ImportPath": "github.com/intervention-engine/fhir/server",
+			"Comment": "DSTU1-138-g10c91ea",
+			"Rev": "10c91ea9d0d780db283217abf86223e38e7f6e4f"
+		},
+		{
+			"ImportPath": "github.com/manucorporat/sse",
+			"Rev": "ee05b128a739a0fb76c7ebd3ae4810c1de808d6d"
+		},
+		{
+			"ImportPath": "github.com/matryer/m",
+			"Rev": "401319f8a9e15c8d8293d0c1af12beaa6895dfc0"
+		},
+		{
+			"ImportPath": "github.com/matryer/silk/parse",
+			"Comment": "v0.1.2-35-g0c548c4",
+			"Rev": "0c548c4068271f054fb881358ed90792969ee1f0"
+		},
+		{
+			"ImportPath": "github.com/matryer/silk/runner",
+			"Comment": "v0.1.2-35-g0c548c4",
+			"Rev": "0c548c4068271f054fb881358ed90792969ee1f0"
+		},
+		{
+			"ImportPath": "github.com/mitre/ptmatch/controllers",
+			"Rev": "3d01873d200316859fcb1fd0a3b90d6363646551"
+		},
+		{
+			"ImportPath": "github.com/mitre/ptmatch/http",
+			"Rev": "3d01873d200316859fcb1fd0a3b90d6363646551"
+		},
+		{
+			"ImportPath": "github.com/mitre/ptmatch/logger",
+			"Rev": "3d01873d200316859fcb1fd0a3b90d6363646551"
+		},
+		{
+			"ImportPath": "github.com/mitre/ptmatch/middleware",
+			"Rev": "3d01873d200316859fcb1fd0a3b90d6363646551"
+		},
+		{
+			"ImportPath": "github.com/mitre/ptmatch/models",
+			"Rev": "3d01873d200316859fcb1fd0a3b90d6363646551"
+		},
+		{
+			"ImportPath": "github.com/mitre/ptmatch/server",
+			"Rev": "3d01873d200316859fcb1fd0a3b90d6363646551"
+		},
+		{
+			"ImportPath": "github.com/pebbe/util",
+			"Rev": "732c49a562eac4233f1e635fdfa58f9c8bc0f969"
+		},
+		{
+			"ImportPath": "github.com/satori/go.uuid",
+			"Rev": "f9ab0dce87d815821e221626b772e3475a0d2749"
+		},
+		{
+			"ImportPath": "github.com/thoas/stats",
+			"Rev": "7f7735fe9a9da3aadbc1b7fc6e59012a137dd516"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "4876518f9e71663000c348837735820161a42df7"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "5eaf0df67e70d6997a9fe0ed24383fa1b01638d3"
+		},
+		{
+			"ImportPath": "gopkg.in/check.v1",
+			"Rev": "64131543e7896d5bcc6bd5a76287eb75ea96c673"
+		},
+		{
+			"ImportPath": "gopkg.in/go-playground/validator.v8",
+			"Comment": "v8.17.1",
+			"Rev": "014792cf3e266caff1e916876be12282b33059e0"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2",
+			"Comment": "r2015.12.06-2-g03c9f3e",
+			"Rev": "03c9f3ee4c14c8e51ee521a6a7d0425658dd6f64"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/bson",
+			"Comment": "r2015.12.06-2-g03c9f3e",
+			"Rev": "03c9f3ee4c14c8e51ee521a6a7d0425658dd6f64"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/dbtest",
+			"Comment": "r2015.12.06-2-g03c9f3e",
+			"Rev": "03c9f3ee4c14c8e51ee521a6a7d0425658dd6f64"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/internal/sasl",
+			"Comment": "r2015.12.06-2-g03c9f3e",
+			"Rev": "03c9f3ee4c14c8e51ee521a6a7d0425658dd6f64"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/internal/scram",
+			"Comment": "r2015.12.06-2-g03c9f3e",
+			"Rev": "03c9f3ee4c14c8e51ee521a6a7d0425658dd6f64"
+		},
+		{
+			"ImportPath": "gopkg.in/tomb.v2",
+			"Rev": "14b3d72120e8d10ea6e6b7f87f7175734b1faab8"
+		},
+		{
+			"ImportPath": "gopkg.in/validator.v2",
+			"Rev": "3e4f037f12a1221a0864cf0dd2e81c452ab22448"
+		}
+	]
+}

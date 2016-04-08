@@ -4,12 +4,15 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/gin-gonic/gin"
+	"github.com/intervention-engine/fhir/server"
 	"github.com/mitre/ecqm/controllers"
+	ptmatch "github.com/mitre/ptmatch/server"
 	"gopkg.in/mgo.v2"
 )
 
 func main() {
+
+	s := server.NewServer("localhost")
 	assetPath := flag.String("assets", "", "Path to static assets to host")
 	flag.Parse()
 
@@ -18,21 +21,22 @@ func main() {
 		return
 	}
 
-	e := gin.Default()
 	session, err := mgo.Dial("localhost")
 	if err != nil {
 		panic(err)
 	}
 	db := session.DB("fhir")
 
-	e.GET("/QualityReport/:id", controllers.ShowQualityReportHandler(db))
-	e.POST("/QualityReport", controllers.CreateQualityReportHandler(db))
+	s.Engine.GET("/QualityReport/:id", controllers.ShowQualityReportHandler(db))
+	s.Engine.POST("/QualityReport", controllers.CreateQualityReportHandler(db))
 
-	e.GET("/Measure/:id", controllers.ShowMeasureHandler(db))
-	e.GET("/Measure", controllers.IndexMeasureHandler(db))
-	e.GET("/UserInfo", controllers.UserInfo)
+	s.Engine.GET("/Measure/:id", controllers.ShowMeasureHandler(db))
+	s.Engine.GET("/Measure", controllers.IndexMeasureHandler(db))
+	s.Engine.GET("/UserInfo", controllers.UserInfo)
 
-	e.StaticFile("/", fmt.Sprintf("%s/index.html", *assetPath))
-	e.Static("/assets", fmt.Sprintf("%s/assets", *assetPath))
-	e.Run(":3001")
+	s.Engine.StaticFile("/", fmt.Sprintf("%s/index.html", *assetPath))
+	s.Engine.Static("/assets", fmt.Sprintf("%s/assets", *assetPath))
+	ptmatch.Setup(s)
+
+	s.Run(server.Config{})
 }
