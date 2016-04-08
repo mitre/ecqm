@@ -66,27 +66,27 @@
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/controllers",
-			"Rev": "3d01873d200316859fcb1fd0a3b90d6363646551"
+			"Rev": "897aeabd3d6574f4e3d88a029f7e2dad91b31c0e"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/http",
-			"Rev": "3d01873d200316859fcb1fd0a3b90d6363646551"
+			"Rev": "897aeabd3d6574f4e3d88a029f7e2dad91b31c0e"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/logger",
-			"Rev": "3d01873d200316859fcb1fd0a3b90d6363646551"
+			"Rev": "897aeabd3d6574f4e3d88a029f7e2dad91b31c0e"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/middleware",
-			"Rev": "3d01873d200316859fcb1fd0a3b90d6363646551"
+			"Rev": "897aeabd3d6574f4e3d88a029f7e2dad91b31c0e"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/models",
-			"Rev": "3d01873d200316859fcb1fd0a3b90d6363646551"
+			"Rev": "897aeabd3d6574f4e3d88a029f7e2dad91b31c0e"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/server",
-			"Rev": "3d01873d200316859fcb1fd0a3b90d6363646551"
+			"Rev": "897aeabd3d6574f4e3d88a029f7e2dad91b31c0e"
 		},
 		{
 			"ImportPath": "github.com/pebbe/util",
