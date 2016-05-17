@@ -1,6 +1,7 @@
 {
 	"ImportPath": "github.com/mitre/ecqm",
 	"GoVersion": "go1.6",
+	"GodepVersion": "v58",
 	"Packages": [
 		"github.com/mitre/ecqm",
 		"github.com/mitre/ecqm/controllers",
@@ -33,18 +34,18 @@
 		},
 		{
 			"ImportPath": "github.com/intervention-engine/fhir/models",
-			"Comment": "DSTU1-138-g10c91ea",
-			"Rev": "10c91ea9d0d780db283217abf86223e38e7f6e4f"
+			"Comment": "DSTU1-139-ge85a326",
+			"Rev": "e85a32653a2ba78ca724d8c68c21a1b60664a036"
 		},
 		{
 			"ImportPath": "github.com/intervention-engine/fhir/search",
-			"Comment": "DSTU1-138-g10c91ea",
-			"Rev": "10c91ea9d0d780db283217abf86223e38e7f6e4f"
+			"Comment": "DSTU1-139-ge85a326",
+			"Rev": "e85a32653a2ba78ca724d8c68c21a1b60664a036"
 		},
 		{
 			"ImportPath": "github.com/intervention-engine/fhir/server",
-			"Comment": "DSTU1-138-g10c91ea",
-			"Rev": "10c91ea9d0d780db283217abf86223e38e7f6e4f"
+			"Comment": "DSTU1-139-ge85a326",
+			"Rev": "e85a32653a2ba78ca724d8c68c21a1b60664a036"
 		},
 		{
 			"ImportPath": "github.com/manucorporat/sse",
@@ -66,27 +67,27 @@
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/controllers",
-			"Rev": "ab2c848e75b36f970e578acc79c9239e1e3d28f8"
+			"Rev": "609a407ff19ac4cf69cdfef8938bba87ec5f74be"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/http",
-			"Rev": "ab2c848e75b36f970e578acc79c9239e1e3d28f8"
+			"Rev": "609a407ff19ac4cf69cdfef8938bba87ec5f74be"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/logger",
-			"Rev": "ab2c848e75b36f970e578acc79c9239e1e3d28f8"
+			"Rev": "609a407ff19ac4cf69cdfef8938bba87ec5f74be"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/middleware",
-			"Rev": "ab2c848e75b36f970e578acc79c9239e1e3d28f8"
+			"Rev": "609a407ff19ac4cf69cdfef8938bba87ec5f74be"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/models",
-			"Rev": "ab2c848e75b36f970e578acc79c9239e1e3d28f8"
+			"Rev": "609a407ff19ac4cf69cdfef8938bba87ec5f74be"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/server",
-			"Rev": "ab2c848e75b36f970e578acc79c9239e1e3d28f8"
+			"Rev": "609a407ff19ac4cf69cdfef8938bba87ec5f74be"
 		},
 		{
 			"ImportPath": "github.com/pebbe/util",
