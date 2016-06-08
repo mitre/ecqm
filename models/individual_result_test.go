@@ -2,7 +2,6 @@ package models
 
 import (
 	"github.com/pebbe/util"
-
 	. "gopkg.in/check.v1"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
@@ -32,18 +31,16 @@ func (i *IndividualResultSuite) TearDownTest(c *C) {
 	i.DBServer.Wipe()
 }
 
-func (i *IndividualResultSuite) TestFindAndPopulateIndividualResult(c *C) {
-	ir := &IndividualResult{MeasureID: "abcd", EffectiveDate: 1234, PatientID: "1234", InitialPatientPopulation: 5}
+func (i *IndividualResultSuite) TestFindAllResultsForPatient(c *C) {
+	ir := IndividualResult{MeasureID: "abcd", EffectiveDate: 1234, PatientID: "1234", InitialPatientPopulation: 1}
 	id := bson.NewObjectId()
 	rw := &ResultWrapper{ID: id, IndividualResult: ir}
 	i.Database.C("patient_cache").Insert(rw)
-	irToFind := &IndividualResult{MeasureID: "abcd", EffectiveDate: 1234, PatientID: "1234"}
-	exists, err := FindAndPopulateIndividualResult(i.Database, irToFind)
+	ir2 := IndividualResult{MeasureID: "efgh", EffectiveDate: 1234, PatientID: "1234", InitialPatientPopulation: 0}
+	id2 := bson.NewObjectId()
+	rw2 := &ResultWrapper{ID: id2, IndividualResult: ir2}
+	i.Database.C("patient_cache").Insert(rw2)
+	results, err := FindAllResultsForPatient(i.Database, "1234")
 	util.CheckErr(err)
-	c.Assert(exists, Equals, true)
-	c.Assert(irToFind.InitialPatientPopulation, Equals, 5)
-	irDoesntExist := &IndividualResult{MeasureID: "foobar", EffectiveDate: 1234, PatientID: "1234"}
-	exists, err = FindAndPopulateIndividualResult(i.Database, irDoesntExist)
-	util.CheckErr(err)
-	c.Assert(exists, Equals, false)
+	c.Assert(len(results), Equals, 2)
 }
