@@ -17,7 +17,7 @@ type IndividualResult struct {
 	Exclusion                int32  `bson:"DENEX,omitempty" json:"exclusion"`
 	Numerator                int32  `bson:"NUMER,omitempty" json:"numerator"`
 	MeasureID                string `bson:"measure_id,omitempty" json:"measureId"`
-	SubID                    string `bson:"sub_id,omitempty" json:"measureId"`
+	SubID                    string `bson:"sub_id,omitempty" json:"subId"`
 	EffectiveDate            int32  `bson:"effective_date,omitempty" json:"effectiveDate,omitempty" validate:"nonzero"`
 }
 
