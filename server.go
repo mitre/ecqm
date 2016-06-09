@@ -29,6 +29,7 @@ func main() {
 
 	s.Engine.GET("/QualityReport/:id", controllers.ShowQualityReportHandler(db))
 	s.Engine.POST("/QualityReport", controllers.CreateQualityReportHandler(db))
+	s.Engine.GET("/PatientReport/:id", controllers.ShowIndividualResultsForPatientHandler(db))
 
 	s.Engine.GET("/Measure/:id", controllers.ShowMeasureHandler(db))
 	s.Engine.GET("/Measure", controllers.IndexMeasureHandler(db))
