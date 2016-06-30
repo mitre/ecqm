@@ -39,6 +39,10 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+var SearchParams = map[string][]string{
+	"RecordMatchRun": []string{"recordMatchContextId"},
+}
+
 type ResourceController struct {
 	DatabaseProvider func() *mgo.Database
 }
@@ -57,8 +61,11 @@ func (rc *ResourceController) GetResources(ctx *gin.Context) {
 	resources := ptm_models.NewSliceForResourceName(resourceType, 0, 0)
 	c := rc.Database().C(ptm_models.GetCollectionName(resourceType))
 	// retrieve all documents in the collection
-	// TODO Restrict this to resourc type, just to be extra safe
-	err := c.Find(bson.M{}).All(resources)
+	// TODO Restrict this to resource type, just to be extra safe
+	query := buildSearchQuery(resourceType, ctx)
+	logger.Log.WithFields(
+		logrus.Fields{"query": query}).Info("GetResources")
+	err := c.Find(query).All(resources)
 	if err != nil {
 		if err == mgo.ErrNotFound {
 			ctx.String(http.StatusNotFound, "Not Found")
@@ -118,7 +125,7 @@ func (rc *ResourceController) GetResource(ctx *gin.Context) {
 	// Validate id as a bson Object ID
 	id, err := toBsonObjectID(ctx.Param("id"))
 	if err != nil {
-		ctx.AbortWithError(http.StatusInternalServerError, err)
+		ctx.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
 	logger.Log.WithFields(
@@ -151,7 +158,7 @@ func (rc *ResourceController) CreateResource(ctx *gin.Context) {
 	resourceType := getResourceType(req.URL)
 	resource := ptm_models.NewStructForResourceName(resourceType)
 	if err := ctx.Bind(resource); err != nil {
-		ctx.AbortWithError(http.StatusInternalServerError, err)
+		ctx.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
 
@@ -378,8 +385,24 @@ func (rc *ResourceController) SetAnswerKey(ctx *gin.Context) {
 
 		ctx.JSON(http.StatusOK, recordSet)
 	} else {
-		ctx.AbortWithStatus(400)
+		ctx.AbortWithStatus(http.StatusBadRequest)
 	}
+}
+
+func buildSearchQuery(resourceType string, ctx *gin.Context) bson.M {
+	query := bson.M{}
+	acceptableParams := SearchParams[resourceType]
+	for _, param := range acceptableParams {
+		paramValue := ctx.Query(param)
+		if paramValue != "" {
+			if strings.HasSuffix(param, "Id") && bson.IsObjectIdHex(paramValue) {
+				query[param] = bson.ObjectIdHex(paramValue)
+			} else {
+				query[param] = paramValue
+			}
+		}
+	}
+	return query
 }
 
 func isValidAnswerKey(b fhir_models.Bundle) bool {

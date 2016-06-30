@@ -66,27 +66,27 @@
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/controllers",
-			"Rev": "540c20131040b660a22cf79c35ede2a7519a2f1a"
+			"Rev": "76f26f8104204df03eda061866560556807d1b8c"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/http",
-			"Rev": "540c20131040b660a22cf79c35ede2a7519a2f1a"
+			"Rev": "76f26f8104204df03eda061866560556807d1b8c"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/logger",
-			"Rev": "540c20131040b660a22cf79c35ede2a7519a2f1a"
+			"Rev": "76f26f8104204df03eda061866560556807d1b8c"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/middleware",
-			"Rev": "540c20131040b660a22cf79c35ede2a7519a2f1a"
+			"Rev": "76f26f8104204df03eda061866560556807d1b8c"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/models",
-			"Rev": "540c20131040b660a22cf79c35ede2a7519a2f1a"
+			"Rev": "76f26f8104204df03eda061866560556807d1b8c"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/server",
-			"Rev": "540c20131040b660a22cf79c35ede2a7519a2f1a"
+			"Rev": "76f26f8104204df03eda061866560556807d1b8c"
 		},
 		{
 			"ImportPath": "github.com/pebbe/util",
