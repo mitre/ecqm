@@ -82,7 +82,33 @@ paths:
             was not found
         500:
           description: Internal Server Error
-
+  /PatientReport/{id}:
+    get:
+      operationId: getIndividualResult
+      summary: Returns all results in the database for the given patient
+      tags:
+        - QualityReport
+      parameters:
+        - name: id
+          in: path
+          description: Id for the QualityReport
+          required: true
+          type: string
+      responses:
+        200:
+          description: An array of IndividualResults for the patient
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/IndividualResult'
+        400:
+          description: If the id provided is not a valid BSON ObjectId
+        404:
+          description: |
+            A valid BSON ObjectId was provided but no measure calculation
+            results could be found for a patient with the provided id.
+        500:
+          description: Internal Server Error
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                       Definitions
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -179,3 +205,50 @@ definitions:
         type: string
       observation:
         type: string
+  IndividualResult:
+    description: |
+      The result of an electronic Clinical Quality Measure calculation for an
+      individual patient.
+    type: object
+    properties:
+      patientId:
+        type: string
+        description: An identifier for tracking the patient within this system
+      medicalRecordId:
+        type: string
+        description: The medical record number for an external system
+      first:
+        type: string
+        description: The first (given) name for the patient
+      last:
+        type: string
+        description: The last (family) name for the patient
+      gender:
+        type: string
+      measureId:
+        type: string
+      subId:
+        type: string
+      effectiveDate:
+        type: integer
+        description: |
+          The effectiveDate is the end of the measure period for the purposes of
+          eCQM calculation. It is represented in seconds since January 1, 1970
+          (Unix time).
+      initialPatientPopulation:
+        type: integer
+      denominator:
+        type: integer
+      exception:
+        type: integer
+      exclusion:
+        type: integer
+      numerator:
+        type: integer
+      antinumerator:
+        type: integer
+      measurePopulation:
+        type: integer
+      observation:
+        type: number
+        format: float32
