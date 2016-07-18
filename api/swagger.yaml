@@ -57,6 +57,31 @@ paths:
           description: Bad Request
         500:
           description: Internal Server Error
+  /QualityReport/{id}:
+    get:
+      operationId: getQualityReport
+      summary: Get a quality report by id
+      tags:
+        - QualityReport
+      parameters:
+        - name: id
+          in: path
+          description: Id for the QualityReport
+          required: true
+          type: string
+      responses:
+        200:
+          description: The desired quality report
+          schema:
+            $ref: '#/definitions/QualityReport'
+        400:
+          description: If the id provided is not a valid BSON ObjectId
+        404:
+          description: |
+            A valid BSON ObjectId was provided but a corresponding QualityReport
+            was not found
+        500:
+          description: Internal Server Error
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                       Definitions
@@ -85,6 +110,8 @@ definitions:
             - completed
           log:
             type: array
+            items:
+              type: string
       measureId:
         type: string
       subId:
