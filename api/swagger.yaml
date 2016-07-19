@@ -109,6 +109,41 @@ paths:
             results could be found for a patient with the provided id.
         500:
           description: Internal Server Error
+  /Measure:
+    get:
+      operationId: getAllMeasures
+      summary: Get all of the measures in the system
+      tags:
+        - QualityMeasure
+      responses:
+        200:
+          description: An array of Measures
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Measure'
+        500:
+          description: Internal Server Error
+  /Measure/{id}:
+    get:
+      operationId: getMeasure
+      summary: Get a quality measure definition
+      tags:
+        - QualityMeasure
+      parameters:
+        - name: id
+          in: path
+          description: The HQMF Id for the Measure
+          required: true
+          type: string
+      responses:
+        200:
+          description: The desired measure
+          schema:
+            $ref: '#/definitions/Measure'
+        500:
+          description: Internal Server Error
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                       Definitions
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -252,3 +287,39 @@ definitions:
       observation:
         type: number
         format: float32
+  Measure:
+    description: |
+      The definition of a clinical quality measure
+    type: object
+    properties:
+      hqmfId:
+        type: string
+      hqmfSetId:
+        type: string
+      hqmfVersionNumber:
+        type: integer
+      cmsId:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      type:
+        type: string
+        enum:
+          - ep
+          - eh
+      category:
+        type: string
+      continuousVariable:
+        type: boolean
+      episodeOfCare:
+        type: boolean
+      populationIds:
+        $ref: "#/definitions/PopulationIDs"
+      subId:
+        type: string
+      subtitle:
+        type: string
+      shortSubtitle:
+        type: string
