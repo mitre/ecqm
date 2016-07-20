@@ -12,7 +12,22 @@ info:
   version: "0.1.0"
   title: eCQM REST API
   description: |
-    eCQM description goes here
+    This API provides services to describing and calculating electronic clinical
+    quality measures.
+
+    The API allows clients to get a list of all clinical quality measures the
+    system currently has loaded. Individual measures may be retrieved by HQMF
+    id. Clients may use measure information to create user interfaces or to
+    request new clinical quality measure calculations.
+
+    Measure calculations are created through the Quality Report services. To
+    start a measure calculation, clients should POST to the QualityReport
+    endpoint. If the measure has already been calculated, it will be returned
+    with the results populates and the status.state property set to "completed".
+    If the measure has not yet been calculated, the state of the returned
+    QualityReport will be "requested". Using the id property returned when
+    creating the QualityReport, clients can poll the /QualityReport/{id}
+    endpoint with GET requests until measure calculation has completed.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0
