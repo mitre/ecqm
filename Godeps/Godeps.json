@@ -1,10 +1,9 @@
 {
 	"ImportPath": "github.com/mitre/ecqm",
 	"GoVersion": "go1.6",
+	"GodepVersion": "v74",
 	"Packages": [
-		"github.com/mitre/ecqm",
-		"github.com/mitre/ecqm/controllers",
-		"github.com/mitre/ecqm/models"
+		"./..."
 	],
 	"Deps": [
 		{
@@ -66,27 +65,27 @@
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/controllers",
-			"Rev": "76f26f8104204df03eda061866560556807d1b8c"
+			"Rev": "3b49e4754bd21afc1dc6add4180250236d51aac7"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/http",
-			"Rev": "76f26f8104204df03eda061866560556807d1b8c"
+			"Rev": "3b49e4754bd21afc1dc6add4180250236d51aac7"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/logger",
-			"Rev": "76f26f8104204df03eda061866560556807d1b8c"
+			"Rev": "3b49e4754bd21afc1dc6add4180250236d51aac7"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/middleware",
-			"Rev": "76f26f8104204df03eda061866560556807d1b8c"
+			"Rev": "3b49e4754bd21afc1dc6add4180250236d51aac7"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/models",
-			"Rev": "76f26f8104204df03eda061866560556807d1b8c"
+			"Rev": "3b49e4754bd21afc1dc6add4180250236d51aac7"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/server",
-			"Rev": "76f26f8104204df03eda061866560556807d1b8c"
+			"Rev": "3b49e4754bd21afc1dc6add4180250236d51aac7"
 		},
 		{
 			"ImportPath": "github.com/pebbe/util",
