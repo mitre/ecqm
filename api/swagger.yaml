@@ -1,0 +1,340 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# Swagger Specification for electronic clinical quality measure calculation
+#
+# Copyright (c) 2016.  The MITRE Corporation. All rights reserved.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+swagger: '2.0'
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#                  API Information
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+info:
+  version: "0.1.0"
+  title: eCQM REST API
+  description: |
+    This API provides services to describing and calculating electronic clinical
+    quality measures.
+
+    The API allows clients to get a list of all clinical quality measures the
+    system currently has loaded. Individual measures may be retrieved by HQMF
+    id. Clients may use measure information to create user interfaces or to
+    request new clinical quality measure calculations.
+
+    Measure calculations are created through the Quality Report services. To
+    start a measure calculation, clients should POST to the QualityReport
+    endpoint. If the measure has already been calculated, it will be returned
+    with the results populates and the status.state property set to "completed".
+    If the measure has not yet been calculated, the state of the returned
+    QualityReport will be "requested". Using the id property returned when
+    creating the QualityReport, clients can poll the /QualityReport/{id}
+    endpoint with GET requests until measure calculation has completed.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#   Host, service Base Path, Schemes and Content Types
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+consumes:
+  - application/json
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#           Paths
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+paths:
+  /QualityReport:
+    post:
+      operationId: createQualityReport
+      summary: Create or find a quality report
+      tags:
+        - QualityReport
+      parameters:
+        - name: qualityReport
+          in: body
+          description: Record Match Context to add
+          required: true
+          schema:
+            $ref: '#/definitions/QualityReport'
+      responses:
+        200:
+          description: |
+            If the quality report exists, for the posted measureId, subId (if
+            provided) and effectiveDate, it will be returned. Otherwise a new
+            quality report will be created. The status of this report can be
+            polled by extracting the id from the provided JSON and performing
+            a GET
+        400:
+          description: Bad Request
+        500:
+          description: Internal Server Error
+  /QualityReport/{id}:
+    get:
+      operationId: getQualityReport
+      summary: Get a quality report by id
+      tags:
+        - QualityReport
+      parameters:
+        - name: id
+          in: path
+          description: Id for the QualityReport
+          required: true
+          type: string
+      responses:
+        200:
+          description: The desired quality report
+          schema:
+            $ref: '#/definitions/QualityReport'
+        400:
+          description: If the id provided is not a valid BSON ObjectId
+        404:
+          description: |
+            A valid BSON ObjectId was provided but a corresponding QualityReport
+            was not found
+        500:
+          description: Internal Server Error
+  /PatientReport/{id}:
+    get:
+      operationId: getIndividualResult
+      summary: Returns all results in the database for the given patient
+      tags:
+        - QualityReport
+      parameters:
+        - name: id
+          in: path
+          description: Id for the QualityReport
+          required: true
+          type: string
+      responses:
+        200:
+          description: An array of IndividualResults for the patient
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/IndividualResult'
+        400:
+          description: If the id provided is not a valid BSON ObjectId
+        404:
+          description: |
+            A valid BSON ObjectId was provided but no measure calculation
+            results could be found for a patient with the provided id.
+        500:
+          description: Internal Server Error
+  /Measure:
+    get:
+      operationId: getAllMeasures
+      summary: Get all of the measures in the system
+      tags:
+        - QualityMeasure
+      responses:
+        200:
+          description: An array of Measures
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Measure'
+        500:
+          description: Internal Server Error
+  /Measure/{id}:
+    get:
+      operationId: getMeasure
+      summary: Get a quality measure definition
+      tags:
+        - QualityMeasure
+      parameters:
+        - name: id
+          in: path
+          description: The HQMF Id for the Measure
+          required: true
+          type: string
+      responses:
+        200:
+          description: The desired measure
+          schema:
+            $ref: '#/definitions/Measure'
+        500:
+          description: Internal Server Error
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#                       Definitions
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+definitions:
+  QualityReport:
+    type: object
+    description: |
+      A Quality Report is the result of an electronic Clinical Quality Measure
+      calculation.
+    required:
+    - measureId
+    - effectiveDate
+    properties:
+      id:
+        type: string
+      npi:
+        type: string
+      status:
+        type: object
+        properties:
+          state:
+            type: string
+            enum:
+            - requested
+            - completed
+          log:
+            type: array
+            items:
+              type: string
+      measureId:
+        type: string
+      subId:
+        type: string
+      effectiveDate:
+        type: integer
+        description: |
+          The effectiveDate is the end of the measure period for the purposes of
+          eCQM calculation. It is represented in seconds since January 1, 1970
+          (Unix time).
+      result:
+        $ref: '#/definitions/QualityReportResult'
+    example:
+      status:
+        state: completed
+      effectiveDate: 1420088400
+      measureId: 40280381-4C18-79DF-014C-2E72BD870D38
+      result:
+        populationIds:
+          denominator: 48764B33-6FA5-4418-B131-06D9A9012FB2
+          numerator: 0E69D381-A7E7-4063-BA85-C5859B7B3A12
+        denominator: 23
+        numerator: 17
+  QualityReportResult:
+    type: object
+    description: |
+      The totals for a clinical quality measure calculation along with
+      the population ids
+    properties:
+      populationIds:
+        $ref: "#/definitions/PopulationIDs"
+      initialPatientPopulation:
+        type: integer
+      denominator:
+        type: integer
+      exception:
+        type: integer
+      exclusion:
+        type: integer
+      numerator:
+        type: integer
+      antinumerator:
+        type: integer
+      measurePopulation:
+        type: integer
+      observation:
+        type: number
+        format: float32
+  PopulationIDs:
+    type: object
+    description: |
+      The HQMF identifiers for the measure populations
+    properties:
+      initialPatientPopulation:
+        type: string
+      denominator:
+        type: string
+      exception:
+        type: string
+      exclusion:
+        type: string
+      numerator:
+        type: string
+      measurePopulation:
+        type: string
+      observation:
+        type: string
+  IndividualResult:
+    description: |
+      The result of an electronic Clinical Quality Measure calculation for an
+      individual patient.
+    type: object
+    properties:
+      patientId:
+        type: string
+        description: An identifier for tracking the patient within this system
+      medicalRecordId:
+        type: string
+        description: The medical record number for an external system
+      first:
+        type: string
+        description: The first (given) name for the patient
+      last:
+        type: string
+        description: The last (family) name for the patient
+      gender:
+        type: string
+      measureId:
+        type: string
+      subId:
+        type: string
+      effectiveDate:
+        type: integer
+        description: |
+          The effectiveDate is the end of the measure period for the purposes of
+          eCQM calculation. It is represented in seconds since January 1, 1970
+          (Unix time).
+      initialPatientPopulation:
+        type: integer
+      denominator:
+        type: integer
+      exception:
+        type: integer
+      exclusion:
+        type: integer
+      numerator:
+        type: integer
+      antinumerator:
+        type: integer
+      measurePopulation:
+        type: integer
+      observation:
+        type: number
+        format: float32
+  Measure:
+    description: |
+      The definition of a clinical quality measure
+    type: object
+    properties:
+      hqmfId:
+        type: string
+      hqmfSetId:
+        type: string
+      hqmfVersionNumber:
+        type: integer
+      cmsId:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      type:
+        type: string
+        enum:
+          - ep
+          - eh
+      category:
+        type: string
+      continuousVariable:
+        type: boolean
+      episodeOfCare:
+        type: boolean
+      populationIds:
+        $ref: "#/definitions/PopulationIDs"
+      subId:
+        type: string
+      subtitle:
+        type: string
+      shortSubtitle:
+        type: string
