@@ -31,12 +31,12 @@ namespace :bundle do
                  q.readline = true }
     end
 
-    bundle_version = ENV["version"] || "latest"
+    bundle_version = ENV["version"] || "2016"
     @bundle_name = "bundle-#{bundle_version}.zip"
 
     puts "Downloading and saving #{@bundle_name} to #{measures_dir}"
     # Pull down the list of bundles and download the version we're looking for
-    bundle_uri = "https://demo.projectcypress.org/bundles/#{@bundle_name}"
+    bundle_uri = "https://cypressdemo.healthit.gov/measure_bundles/#{@bundle_name}"
     bundle = nil
 
     tries = 0
