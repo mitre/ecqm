@@ -2,6 +2,9 @@
 	"ImportPath": "github.com/mitre/ecqm",
 	"GoVersion": "go1.7",
 	"GodepVersion": "v74",
+	"Packages": [
+		"./..."
+	],
 	"Deps": [
 		{
 			"ImportPath": "github.com/Sirupsen/logrus",
@@ -86,6 +89,20 @@
 			"Rev": "ee05b128a739a0fb76c7ebd3ae4810c1de808d6d"
 		},
 		{
+			"ImportPath": "github.com/matryer/m",
+			"Rev": "401319f8a9e15c8d8293d0c1af12beaa6895dfc0"
+		},
+		{
+			"ImportPath": "github.com/matryer/silk/parse",
+			"Comment": "v0.1.3-39-g5ddd898",
+			"Rev": "5ddd89881981309ad3d6db1d902e8fe335efbad6"
+		},
+		{
+			"ImportPath": "github.com/matryer/silk/runner",
+			"Comment": "v0.1.3-39-g5ddd898",
+			"Rev": "5ddd89881981309ad3d6db1d902e8fe335efbad6"
+		},
+		{
 			"ImportPath": "github.com/mitre/heart",
 			"Rev": "0c46b433a490476c34ce33205e87a72c8e0bc7ef"
 		},
@@ -149,6 +166,10 @@
 			"Rev": "b776ec39b3e54652e09028aaaaac9757f4f8211a"
 		},
 		{
+			"ImportPath": "gopkg.in/check.v1",
+			"Rev": "4f90aeace3a26ad7021961c297b22c42160c7b25"
+		},
+		{
 			"ImportPath": "gopkg.in/go-playground/validator.v8",
 			"Comment": "v8.18.1",
 			"Rev": "5f57d2222ad794d0dffb07e664ea05e2ee07d60c"
@@ -160,6 +181,11 @@
 		},
 		{
 			"ImportPath": "gopkg.in/mgo.v2/bson",
+			"Comment": "r2016.02.04-1-gb6e2fa3",
+			"Rev": "b6e2fa371e64216a45e61072a96d4e3859f169da"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/dbtest",
 			"Comment": "r2016.02.04-1-gb6e2fa3",
 			"Rev": "b6e2fa371e64216a45e61072a96d4e3859f169da"
 		},
@@ -187,6 +213,10 @@
 			"ImportPath": "gopkg.in/square/go-jose.v1/json",
 			"Comment": "v1.0.3",
 			"Rev": "a3927f83df1b1516f9e9dec71839c93e6bcf1db0"
+		},
+		{
+			"ImportPath": "gopkg.in/tomb.v2",
+			"Rev": "14b3d72120e8d10ea6e6b7f87f7175734b1faab8"
 		},
 		{
 			"ImportPath": "gopkg.in/validator.v2",
