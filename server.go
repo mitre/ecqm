@@ -4,9 +4,10 @@ import (
 	"flag"
 	"fmt"
 
+	"github.com/gin-gonic/gin"
+	"github.com/intervention-engine/fhir/auth"
 	"github.com/intervention-engine/fhir/server"
 	"github.com/mitre/ecqm/controllers"
-	"github.com/mitre/heart"
 	ptmatch "github.com/mitre/ptmatch/server"
 	"gopkg.in/mgo.v2"
 )
@@ -27,6 +28,8 @@ func main() {
 	}
 	db := session.DB("fhir")
 
+	var authConfig auth.Config
+
 	if *jwkPath != "" {
 		if *clientID == "" || *opURL == "" {
 			fmt.Println("You must provide both a client ID and OP URL for HEART mode")
@@ -36,24 +39,29 @@ func main() {
 		if secret == "" {
 			secret = "reallySekret"
 		}
-		heart.SetUpRoutes(*jwkPath, *clientID, *opURL,
-			"http://localhost:3001", secret, s.Engine)
+		authConfig = auth.HEART(*clientID, *jwkPath, *opURL, secret)
+	} else {
+		authConfig = auth.None()
 	}
 
-	s.Engine.GET("/QualityReport/:id", controllers.ShowQualityReportHandler(db))
-	s.Engine.POST("/QualityReport", controllers.CreateQualityReportHandler(db))
-	s.Engine.GET("/PatientReport/:id", controllers.ShowIndividualResultsForPatientHandler(db))
+	ar := func(e *gin.Engine) {
+		e.GET("/QualityReport/:id", controllers.ShowQualityReportHandler(db))
+		e.POST("/QualityReport", controllers.CreateQualityReportHandler(db))
+		e.GET("/PatientReport/:id", controllers.ShowIndividualResultsForPatientHandler(db))
 
-	s.Engine.GET("/Measure/:id", controllers.ShowMeasureHandler(db))
-	s.Engine.GET("/Measure", controllers.IndexMeasureHandler(db))
-	s.Engine.GET("/UserInfo", controllers.UserInfo)
+		s.Engine.GET("/Measure/:id", controllers.ShowMeasureHandler(db))
+		e.GET("/Measure", controllers.IndexMeasureHandler(db))
+		e.GET("/UserInfo", controllers.UserInfo)
 
-	if *assetPath != "" {
-		s.Engine.StaticFile("/", fmt.Sprintf("%s/index.html", *assetPath))
-		s.Engine.Static("/assets", fmt.Sprintf("%s/assets", *assetPath))
+		if *assetPath != "" {
+			e.StaticFile("/", fmt.Sprintf("%s/index.html", *assetPath))
+			e.Static("/assets", fmt.Sprintf("%s/assets", *assetPath))
+		}
 	}
+
+	s.AfterRoutes = append(s.AfterRoutes, ar)
 
 	ptmatch.Setup(s)
 
-	s.Run(server.Config{})
+	s.Run(server.Config{Auth: authConfig, ServerURL: "http://localhost:3001"})
 }

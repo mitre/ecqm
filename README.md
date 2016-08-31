@@ -19,7 +19,7 @@ as a plain FHIR server.
 ## Requirements
 
 * Git
-* Go >= 1.6
+* Go >= 1.7
 * Ruby >= 2.2
 * MongoDB >= 3.2
 
@@ -61,12 +61,24 @@ To run all of the tests for this project, run:
 in this directory.
 
 To start the server, run:
-    
+
     go run server.go -assets PATH_TO_ASSETS
 
 In this case, PATH_TO_ASSETS should be a location where a version of either the
 [eCQM Frontend](https://github.com/mitre/ecqm-frontend) or [Patient Match Frontend](https://github.com/mitre/ptmatch-frontend)
 has been built.
+
+## HEART authentication and authorization:
+
+This server has the ability to authenticate users by acting as a [HEART](http://openid.net/wg/heart/)
+compliant OpenID Connect relying party. It can also perform OAuth 2.0 token
+introspection in a HEART compliant manner. To enable it, the following command
+line flags must be used:
+
+    -heartJWK - The path to the client's private key in [JWK format](https://tools.ietf.org/html/rfc7517). The
+                public key must be registered at the OpenID Connect Provider
+    -heartOP - The URL of the HEART compliant OpenID Connect Provider
+    -heartClientID - The client identifier for this system as registered at the OpenID Connect Provider
 
 ## License
 
