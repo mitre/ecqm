@@ -51,16 +51,13 @@ type Store interface {
 // Use the convenience function securecookie.GenerateRandomKey() to create
 // strong keys.
 func NewCookieStore(keyPairs ...[]byte) *CookieStore {
-	cs := &CookieStore{
+	return &CookieStore{
 		Codecs: securecookie.CodecsFromPairs(keyPairs...),
 		Options: &Options{
 			Path:   "/",
 			MaxAge: 86400 * 30,
 		},
 	}
-
-	cs.MaxAge(cs.Options.MaxAge)
-	return cs
 }
 
 // CookieStore stores sessions using secure cookies.
@@ -113,20 +110,6 @@ func (s *CookieStore) Save(r *http.Request, w http.ResponseWriter,
 	return nil
 }
 
-// MaxAge sets the maximum age for the store and the underlying cookie
-// implementation. Individual sessions can be deleted by setting Options.MaxAge
-// = -1 for that session.
-func (s *CookieStore) MaxAge(age int) {
-	s.Options.MaxAge = age
-
-	// Set the maxAge for each securecookie instance.
-	for _, codec := range s.Codecs {
-		if sc, ok := codec.(*securecookie.SecureCookie); ok {
-			sc.MaxAge(age)
-		}
-	}
-}
-
 // FilesystemStore ------------------------------------------------------------
 
 var fileMutex sync.RWMutex
@@ -141,7 +124,7 @@ func NewFilesystemStore(path string, keyPairs ...[]byte) *FilesystemStore {
 	if path == "" {
 		path = os.TempDir()
 	}
-	fs := &FilesystemStore{
+	return &FilesystemStore{
 		Codecs: securecookie.CodecsFromPairs(keyPairs...),
 		Options: &Options{
 			Path:   "/",
@@ -149,9 +132,6 @@ func NewFilesystemStore(path string, keyPairs ...[]byte) *FilesystemStore {
 		},
 		path: path,
 	}
-
-	fs.MaxAge(fs.Options.MaxAge)
-	return fs
 }
 
 // FilesystemStore stores sessions in the filesystem.
@@ -224,20 +204,6 @@ func (s *FilesystemStore) Save(r *http.Request, w http.ResponseWriter,
 	}
 	http.SetCookie(w, NewCookie(session.Name(), encoded, session.Options))
 	return nil
-}
-
-// MaxAge sets the maximum age for the store and the underlying cookie
-// implementation. Individual sessions can be deleted by setting Options.MaxAge
-// = -1 for that session.
-func (s *FilesystemStore) MaxAge(age int) {
-	s.Options.MaxAge = age
-
-	// Set the maxAge for each securecookie instance.
-	for _, codec := range s.Codecs {
-		if sc, ok := codec.(*securecookie.SecureCookie); ok {
-			sc.MaxAge(age)
-		}
-	}
 }
 
 // save writes encoded session.Values to a file.

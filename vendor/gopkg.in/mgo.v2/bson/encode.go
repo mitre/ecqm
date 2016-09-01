@@ -188,7 +188,7 @@ func isZero(v reflect.Value) bool {
 			return v.Interface().(time.Time).IsZero()
 		}
 		for i := 0; i < v.NumField(); i++ {
-			if vt.Field(i).PkgPath != "" && !vt.Field(i).Anonymous {
+			if vt.Field(i).PkgPath != "" {
 				continue // Private field
 			}
 			if !isZero(v.Field(i)) {

@@ -8,8 +8,8 @@
 	"Deps": [
 		{
 			"ImportPath": "github.com/Sirupsen/logrus",
-			"Comment": "v0.10.0-16-gcd7d1bb",
-			"Rev": "cd7d1bbe41066b6c1f19780f895901052150a575"
+			"Comment": "v0.10.0",
+			"Rev": "4b6ea7319e214d98c938f12692336f7ca9348d6b"
 		},
 		{
 			"ImportPath": "github.com/boj/redistore",
@@ -47,7 +47,7 @@
 		},
 		{
 			"ImportPath": "github.com/golang/protobuf/proto",
-			"Rev": "f592bd283e9ef86337a432eb50e592278c3d534d"
+			"Rev": "7390af9dcd3c33042ebaf2474a1724a83cf1a7e6"
 		},
 		{
 			"ImportPath": "github.com/gorilla/context",
@@ -55,11 +55,11 @@
 		},
 		{
 			"ImportPath": "github.com/gorilla/securecookie",
-			"Rev": "e95799a481bbcc3d01c2ad5178524cb8bec9f370"
+			"Rev": "68004d2ba3cbc80d3a9949ea431b5c9f22ee8707"
 		},
 		{
 			"ImportPath": "github.com/gorilla/sessions",
-			"Rev": "99b16d2edd22458c541b3640ce83689b08a05c20"
+			"Rev": "f61c3ec2cf65d69e7efedfd4d060fe128882c951"
 		},
 		{
 			"ImportPath": "github.com/icrowley/fake",
@@ -67,23 +67,23 @@
 		},
 		{
 			"ImportPath": "github.com/intervention-engine/fhir/auth",
-			"Comment": "DSTU1-175-g220f75d",
-			"Rev": "220f75d86070034fe01c8f16ffb45c3e493a8d09"
+			"Comment": "DSTU1-178-gdb6ddaa",
+			"Rev": "db6ddaae17b43a909264051a73ded2418259dfe6"
 		},
 		{
 			"ImportPath": "github.com/intervention-engine/fhir/models",
-			"Comment": "DSTU1-175-g220f75d",
-			"Rev": "220f75d86070034fe01c8f16ffb45c3e493a8d09"
+			"Comment": "DSTU1-178-gdb6ddaa",
+			"Rev": "db6ddaae17b43a909264051a73ded2418259dfe6"
 		},
 		{
 			"ImportPath": "github.com/intervention-engine/fhir/search",
-			"Comment": "DSTU1-175-g220f75d",
-			"Rev": "220f75d86070034fe01c8f16ffb45c3e493a8d09"
+			"Comment": "DSTU1-178-gdb6ddaa",
+			"Rev": "db6ddaae17b43a909264051a73ded2418259dfe6"
 		},
 		{
 			"ImportPath": "github.com/intervention-engine/fhir/server",
-			"Comment": "DSTU1-175-g220f75d",
-			"Rev": "220f75d86070034fe01c8f16ffb45c3e493a8d09"
+			"Comment": "DSTU1-178-gdb6ddaa",
+			"Rev": "db6ddaae17b43a909264051a73ded2418259dfe6"
 		},
 		{
 			"ImportPath": "github.com/itsjamie/gin-cors",
@@ -104,13 +104,13 @@
 		},
 		{
 			"ImportPath": "github.com/matryer/silk/parse",
-			"Comment": "v0.1.3-39-g5ddd898",
-			"Rev": "5ddd89881981309ad3d6db1d902e8fe335efbad6"
+			"Comment": "v0.1.2-35-g0c548c4",
+			"Rev": "0c548c4068271f054fb881358ed90792969ee1f0"
 		},
 		{
 			"ImportPath": "github.com/matryer/silk/runner",
-			"Comment": "v0.1.3-39-g5ddd898",
-			"Rev": "5ddd89881981309ad3d6db1d902e8fe335efbad6"
+			"Comment": "v0.1.2-35-g0c548c4",
+			"Rev": "0c548c4068271f054fb881358ed90792969ee1f0"
 		},
 		{
 			"ImportPath": "github.com/mitre/heart",
@@ -118,46 +118,45 @@
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/controllers",
-			"Comment": "v1.0",
-			"Rev": "cf62bb2f7af9937d9a1bca07a915539c162d8d53"
+			"Comment": "v1.0-1-g603c882",
+			"Rev": "603c882300bcdacd9a2c4bc053da0712d98e3752"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/http",
-			"Comment": "v1.0",
-			"Rev": "cf62bb2f7af9937d9a1bca07a915539c162d8d53"
+			"Comment": "v1.0-1-g603c882",
+			"Rev": "603c882300bcdacd9a2c4bc053da0712d98e3752"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/logger",
-			"Comment": "v1.0",
-			"Rev": "cf62bb2f7af9937d9a1bca07a915539c162d8d53"
+			"Comment": "v1.0-1-g603c882",
+			"Rev": "603c882300bcdacd9a2c4bc053da0712d98e3752"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/middleware",
-			"Comment": "v1.0",
-			"Rev": "cf62bb2f7af9937d9a1bca07a915539c162d8d53"
+			"Comment": "v1.0-1-g603c882",
+			"Rev": "603c882300bcdacd9a2c4bc053da0712d98e3752"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/models",
-			"Comment": "v1.0",
-			"Rev": "cf62bb2f7af9937d9a1bca07a915539c162d8d53"
+			"Comment": "v1.0-1-g603c882",
+			"Rev": "603c882300bcdacd9a2c4bc053da0712d98e3752"
 		},
 		{
 			"ImportPath": "github.com/mitre/ptmatch/server",
-			"Comment": "v1.0",
-			"Rev": "cf62bb2f7af9937d9a1bca07a915539c162d8d53"
+			"Comment": "v1.0-1-g603c882",
+			"Rev": "603c882300bcdacd9a2c4bc053da0712d98e3752"
 		},
 		{
 			"ImportPath": "github.com/pebbe/util",
-			"Rev": "e0e04dfe647cbd76fc8a1fba55406e60a2e49a11"
+			"Rev": "732c49a562eac4233f1e635fdfa58f9c8bc0f969"
 		},
 		{
 			"ImportPath": "github.com/satori/go.uuid",
-			"Comment": "v1.0.0",
 			"Rev": "f9ab0dce87d815821e221626b772e3475a0d2749"
 		},
 		{
 			"ImportPath": "github.com/thoas/stats",
-			"Rev": "69e3c072eec2df2df41afe6214f62eb940e4cd80"
+			"Rev": "7f7735fe9a9da3aadbc1b7fc6e59012a137dd516"
 		},
 		{
 			"ImportPath": "golang.org/x/net/context",
@@ -173,11 +172,11 @@
 		},
 		{
 			"ImportPath": "golang.org/x/sys/unix",
-			"Rev": "b776ec39b3e54652e09028aaaaac9757f4f8211a"
+			"Rev": "5eaf0df67e70d6997a9fe0ed24383fa1b01638d3"
 		},
 		{
 			"ImportPath": "gopkg.in/check.v1",
-			"Rev": "4f90aeace3a26ad7021961c297b22c42160c7b25"
+			"Rev": "64131543e7896d5bcc6bd5a76287eb75ea96c673"
 		},
 		{
 			"ImportPath": "gopkg.in/go-playground/validator.v8",
@@ -186,28 +185,28 @@
 		},
 		{
 			"ImportPath": "gopkg.in/mgo.v2",
-			"Comment": "r2016.02.04-1-gb6e2fa3",
-			"Rev": "b6e2fa371e64216a45e61072a96d4e3859f169da"
+			"Comment": "r2015.12.06-2-g03c9f3e",
+			"Rev": "03c9f3ee4c14c8e51ee521a6a7d0425658dd6f64"
 		},
 		{
 			"ImportPath": "gopkg.in/mgo.v2/bson",
-			"Comment": "r2016.02.04-1-gb6e2fa3",
-			"Rev": "b6e2fa371e64216a45e61072a96d4e3859f169da"
+			"Comment": "r2015.12.06-2-g03c9f3e",
+			"Rev": "03c9f3ee4c14c8e51ee521a6a7d0425658dd6f64"
 		},
 		{
 			"ImportPath": "gopkg.in/mgo.v2/dbtest",
-			"Comment": "r2016.02.04-1-gb6e2fa3",
-			"Rev": "b6e2fa371e64216a45e61072a96d4e3859f169da"
+			"Comment": "r2015.12.06-2-g03c9f3e",
+			"Rev": "03c9f3ee4c14c8e51ee521a6a7d0425658dd6f64"
 		},
 		{
 			"ImportPath": "gopkg.in/mgo.v2/internal/sasl",
-			"Comment": "r2016.02.04-1-gb6e2fa3",
-			"Rev": "b6e2fa371e64216a45e61072a96d4e3859f169da"
+			"Comment": "r2015.12.06-2-g03c9f3e",
+			"Rev": "03c9f3ee4c14c8e51ee521a6a7d0425658dd6f64"
 		},
 		{
 			"ImportPath": "gopkg.in/mgo.v2/internal/scram",
-			"Comment": "r2016.02.04-1-gb6e2fa3",
-			"Rev": "b6e2fa371e64216a45e61072a96d4e3859f169da"
+			"Comment": "r2015.12.06-2-g03c9f3e",
+			"Rev": "03c9f3ee4c14c8e51ee521a6a7d0425658dd6f64"
 		},
 		{
 			"ImportPath": "gopkg.in/square/go-jose.v1",

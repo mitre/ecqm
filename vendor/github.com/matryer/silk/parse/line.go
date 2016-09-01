@@ -2,6 +2,8 @@ package parse
 
 import (
 	"bytes"
+	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"regexp"
@@ -13,23 +15,19 @@ var (
 
 // Line represents a single line.
 type Line struct {
-	Number  int
-	Type    LineType
-	Bytes   []byte
-	Comment []byte
-	Regexp  *regexp.Regexp
-	detail  *Detail
+	Number int
+	Type   LineType
+	Bytes  []byte
+	Regexp *regexp.Regexp
+	detail *Detail
 }
 
 // ParseLine makes a new Line with the given data.
 func ParseLine(n int, text []byte) (*Line, error) {
 	linetype := LineTypePlain
 	// trim off comments
-	var comment []byte
 	if bytes.Contains(text, commentPrefix) {
-		segs := bytes.Split(text, commentPrefix)
-		text = segs[0]
-		comment = segs[1]
+		text = bytes.Split(text, commentPrefix)[0]
 	}
 	var rx *regexp.Regexp
 	for _, item := range matchTypes {
@@ -49,12 +47,11 @@ func ParseLine(n int, text []byte) (*Line, error) {
 		}
 	}
 	return &Line{
-		Number:  n,
-		Type:    linetype,
-		Bytes:   text,
-		Regexp:  rx,
-		Comment: comment,
-		detail:  d,
+		Number: n,
+		Type:   linetype,
+		Bytes:  text,
+		Regexp: rx,
+		detail: d,
 	}, nil
 }
 
@@ -66,24 +63,9 @@ func (l *Line) Detail() *Detail {
 	return l.detail
 }
 
-var placeholderRegexp = regexp.MustCompile(`{(.*)}`)
-
-// Capture extracts the first placeholder value from the
-// comments.
-func (l *Line) Capture() string {
-	if len(l.Comment) == 0 {
-		return ""
-	}
-	matches := placeholderRegexp.FindSubmatch(l.Comment)
-	if len(matches) < 2 {
-		return ""
-	}
-	return string(matches[1])
-}
-
 type Lines []*Line
 
-func (l Lines) Bytes() []byte {
+func (l Lines) Join() []byte {
 	var lines [][]byte
 	for _, line := range l {
 		lines = append(lines, line.Bytes)
@@ -92,13 +74,16 @@ func (l Lines) Bytes() []byte {
 }
 
 func (l Lines) String() string {
-	return string(l.Bytes())
+	return string(l.Join())
 }
 
-// Reader makes a new io.Reader that will read the
-// bytes from every line.
+// Reader gets an io.Reader that will read every line.
 func (l Lines) Reader() io.Reader {
-	return bytes.NewReader(l.Bytes())
+	var readers []io.Reader
+	for _, line := range l {
+		readers = append(readers, bytes.NewReader(line.Bytes))
+	}
+	return io.MultiReader(readers...)
 }
 
 // Number gets the line number of the first line.
@@ -107,6 +92,39 @@ func (l Lines) Number() int {
 		return 0
 	}
 	return l[0].Number
+}
+
+type Detail struct {
+	Key   string
+	Value *Value
+}
+
+func parseDetail(b []byte, detailregex *regexp.Regexp) (*Detail, error) {
+	detail, err := getok(detailregex.FindSubmatch(b), 1)
+	if err != nil {
+		panic("silk: failed to parse detail: " + err.Error())
+	}
+	sep := bytes.IndexAny(detail, ":=")
+	if sep == -1 || sep > len(detail)-1 {
+		return nil, errors.New("malformed detail")
+	}
+	key := clean(detail[0:sep])
+	return &Detail{
+		Key:   string(bytes.TrimSpace(key)),
+		Value: ParseValue(detail[sep+1:]),
+	}, nil
+}
+
+func (d *Detail) String() string {
+	valbytes, err := json.Marshal(d.Value)
+	if err != nil {
+		return d.Key + ": " + fmt.Sprint(d.Value)
+	}
+	return d.Key + ": " + string(valbytes)
+}
+
+func clean(b []byte) []byte {
+	return bytes.Trim(bytes.TrimSpace(b), "`")
 }
 
 // LineType represents the type of a line.

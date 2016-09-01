@@ -53,7 +53,7 @@ func (v Value) Equal(val interface{}) bool {
 			return true
 		}
 	}
-	return fmt.Sprintf("%v", v.Data) == fmt.Sprintf("%v", val)
+	return v.Data == val
 }
 
 func (v Value) Type() string {

@@ -8,6 +8,7 @@ import (
 	"github.com/intervention-engine/fhir/auth"
 	"github.com/intervention-engine/fhir/server"
 	"github.com/mitre/ecqm/controllers"
+	"github.com/mitre/ptmatch/middleware"
 	ptmatch "github.com/mitre/ptmatch/server"
 	"gopkg.in/mgo.v2"
 )
@@ -53,15 +54,17 @@ func main() {
 		e.GET("/Measure", controllers.IndexMeasureHandler(db))
 		e.GET("/UserInfo", controllers.UserInfo)
 
+		ptmatch.Setup(e)
+
 		if *assetPath != "" {
 			e.StaticFile("/", fmt.Sprintf("%s/index.html", *assetPath))
 			e.Static("/assets", fmt.Sprintf("%s/assets", *assetPath))
 		}
 	}
+	recMatchWatch := middleware.PostProcessRecordMatchResponse()
+	s.AddMiddleware("Bundle", recMatchWatch)
 
 	s.AfterRoutes = append(s.AfterRoutes, ar)
-
-	ptmatch.Setup(s)
 
 	s.Run(server.Config{Auth: authConfig, ServerURL: "http://localhost:3001"})
 }
