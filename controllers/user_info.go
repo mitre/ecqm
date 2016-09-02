@@ -7,5 +7,10 @@ import (
 )
 
 func UserInfo(c *gin.Context) {
-	c.String(http.StatusOK, c.Request.Header.Get("X-USER"))
+	ui, exists := c.Get("UserInfo")
+	if exists {
+		c.JSON(http.StatusOK, ui)
+	} else {
+		c.String(http.StatusOK, "{\"name\": \"Unknown\"}")
+	}
 }
