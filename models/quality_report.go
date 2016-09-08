@@ -76,18 +76,18 @@ type QualityReportResult struct {
 	PopulationIDs            PopulationIDs `bson:"population_ids,omitempty" json:"populationIds,omitempty"`
 	InitialPatientPopulation int32         `bson:"IPP" json:"initialPatientPopulation"`
 	Denominator              int32         `bson:"DENOM,omitempty" json:"denominator"`
-	Exception                int32         `bson:"DENEXCP,omitempty" json:"exception"`
+	Exception                int32         `bson:"DENEXCEP,omitempty" json:"exception"`
 	Exclusion                int32         `bson:"DENEX,omitempty" json:"exclusion"`
 	Numerator                int32         `bson:"NUMER,omitempty" json:"numerator"`
 	AntiNumerator            int32         `bson:"antinumerator,omitempty" json:"antinumerator"`
-	MeasurePopulation        int32         `bson:"MSRPOPL,omitempty" json:"measurePopulation,omitempty"`
-	Observation              float32       `bson:"OBSERV,omitempty" json:"Observation,omitempty"`
+	MeasurePopulation        int32         `bson:"MSRPOPL,omitempty" json:"measurePopulation"`
+	Observation              float32       `bson:"OBSERV,omitempty" json:"observation"`
 }
 
 type PopulationIDs struct {
 	InitialPatientPopulation string `bson:"IPP,omitempty" json:"initialPatientPopulation,omitempty"`
 	Denominator              string `bson:"DENOM,omitempty" json:"denominator,omitempty"`
-	Exception                string `bson:"DENEXCP,omitempty" json:"exception,omitempty"`
+	Exception                string `bson:"DENEXCEP,omitempty" json:"exception,omitempty"`
 	Exclusion                string `bson:"DENEX,omitempty" json:"exclusion,omitempty"`
 	Numerator                string `bson:"NUMER,omitempty" json:"numerator,omitempty"`
 	MeasurePopulation        string `bson:"MSRPOPL,omitempty" json:"measurePopulation,omitempty"`
