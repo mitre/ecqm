@@ -97,6 +97,50 @@ paths:
             was not found
         500:
           description: Internal Server Error
+  /QualityReport/{id}/PatientResults:
+    get:
+      operationId: getQualityReportPatientResults
+      summary: |
+        Get a list of patients for a given population. Patients are sorted by last name.
+      tags:
+        - QualityReport
+      parameters:
+        - name: id
+          in: path
+          description: Id for the QualityReport
+          required: true
+          type: string
+        - name: population
+          in: query
+          description: |
+            The desired population. Values are - initialPatientPopulation, denominator, numerator, exception, exclusion, antinumerator
+          required: true
+          type: string
+        - name: limit
+          in: query
+          description: maximum number of patients to return
+          required: true
+          type: string
+          format: int32
+        - name: offset
+          in: query
+          description: number of patients to skip when generating the list
+          required: true
+          type: string
+          format: int32
+      responses:
+        200:
+          description: The desired list of patients for the given population
+          schema:
+            $ref: '#/definitions/PopulationResult'
+        400:
+          description: If the id provided is not a valid BSON ObjectId
+        404:
+          description: |
+            A valid BSON ObjectId was provided but a corresponding QualityReport
+            was not found
+        500:
+          description: Internal Server Error
   /PatientReport/{id}:
     get:
       operationId: getIndividualResult
@@ -254,6 +298,44 @@ definitions:
       measurePopulation:
         type: string
       observation:
+        type: string
+  PopulationResult:
+    description: |
+      A listing of patients that meet a specific population for a Clinical Quality
+      Measure calculation
+    type: object
+    properties:
+      total:
+        type: integer
+        description: The total number of people in the given population that was requested
+      populationQuery:
+        $ref: "#/definitions/PopulationQuery"
+      patients:
+        type: array
+        items:
+          $ref: "#/definitions/IndividualResult"
+  PopulationQuery:
+    description: |
+      A representation of the request to fetch a set of patients for a population of a measure
+    type: object
+    properties:
+      limit:
+        type: integer
+        description: Limit that was provided on the number of patients to return
+      offset:
+        type: integer
+        description: Number of patients to skiped when providing this result.
+      measureId:
+        type: string
+      subId:
+        type: string
+      effectiveDate:
+        type: integer
+        description: |
+          The effectiveDate is the end of the measure period for the purposes of
+          eCQM calculation. It is represented in seconds since January 1, 1970
+          (Unix time).
+      population:
         type: string
   IndividualResult:
     description: |

@@ -49,6 +49,7 @@ func main() {
 		e.GET("/QualityReport/:id", controllers.ShowQualityReportHandler(db))
 		e.POST("/QualityReport", controllers.CreateQualityReportHandler(db))
 		e.GET("/PatientReport/:id", controllers.ShowIndividualResultsForPatientHandler(db))
+		e.GET("/QualityReport/:id/PatientResults", controllers.ShowQualityReportPatientsHandler(db))
 
 		s.Engine.GET("/Measure/:id", controllers.ShowMeasureHandler(db))
 		e.GET("/Measure", controllers.IndexMeasureHandler(db))
