@@ -32,12 +32,25 @@ func (q *QualityReportSuite) SetUpSuite(c *C) {
 	session := q.DBServer.Session()
 	q.Database = session.DB("qme-test")
 	qr := &models.QualityReport{MeasureID: "efg", EffectiveDate: 5678}
-	id := bson.ObjectIdHex("56bd06841cd462774f2af485")
-	qr.ID = id
+	qrID := bson.ObjectIdHex("56bd06841cd462774f2af485")
+	qr.ID = qrID
 	q.Database.C("query_cache").Insert(qr)
+	ir := models.IndividualResult{MeasureID: "abcd", EffectiveDate: 1234, PatientID: "1234", InitialPatientPopulation: 1, Last: "Jones"}
+	id := bson.NewObjectId()
+	rw := &models.ResultWrapper{ID: id, IndividualResult: ir}
+	q.Database.C("patient_cache").Insert(rw)
+	ir2 := models.IndividualResult{MeasureID: "efg", EffectiveDate: 5678, PatientID: "1234", InitialPatientPopulation: 1, Last: "B"}
+	id2 := bson.NewObjectId()
+	rw2 := &models.ResultWrapper{ID: id2, IndividualResult: ir2}
+	q.Database.C("patient_cache").Insert(rw2)
+	ir3 := models.IndividualResult{MeasureID: "efg", EffectiveDate: 5678, PatientID: "5678", InitialPatientPopulation: 1, Denominator: 1, Last: "A"}
+	id3 := bson.NewObjectId()
+	rw3 := &models.ResultWrapper{ID: id3, IndividualResult: ir3}
+	q.Database.C("patient_cache").Insert(rw3)
 	e := gin.New()
 	e.GET("/QualityReport/:id", ShowQualityReportHandler(q.Database))
 	e.POST("/QualityReport", CreateQualityReportHandler(q.Database))
+	e.GET("/QualityReport/:id/PatientResults", ShowQualityReportPatientsHandler(q.Database))
 	q.Engine = e
 }
 
