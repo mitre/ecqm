@@ -1,5 +1,5 @@
 hash: 663fc26e826cc765c38c9ca636519ae76e057352e7f22f0c2bf8a52975a6f6e5
-updated: 2016-09-23T11:38:54.562001643-04:00
+updated: 2016-09-23T12:54:39.392375601-04:00
 imports:
 - name: github.com/boj/redistore
   version: fc113767cd6b051980f260d6dbe84b2740c46ab0
@@ -48,13 +48,20 @@ imports:
   version: 2b7ba3950eaac14f1cf522d9c1609718fb11da25
   subpackages:
   - '...'
+  - controllers
+  - http
   - logger
   - middleware
   - models
+  - server
 - name: github.com/pebbe/util
   version: e0e04dfe647cbd76fc8a1fba55406e60a2e49a11
+- name: github.com/satori/go.uuid
+  version: 0aa62d5ddceb50dbcb909d790b5345affd3669b6
 - name: github.com/Sirupsen/logrus
   version: 3ec0642a7fb6488f65b06f9040adc67e3990296a
+- name: github.com/thoas/stats
+  version: 152b5d051953fdb6e45f14b6826962aadc032324
 - name: golang.org/x/net
   version: f315505cf3349909cdf013ea56690da34e96a451
   subpackages:
