@@ -1,0 +1,21 @@
+package: github.com/mitre/ecqm
+import:
+- package: github.com/gin-gonic/gin
+- package: github.com/intervention-engine/fhir
+  subpackages:
+  - auth
+  - server
+- package: gopkg.in/mgo.v2
+  subpackages:
+  - bson
+- package: gopkg.in/validator.v2
+- package: github.com/mitre/ptmatch
+  version: glide
+  subpackages:
+  - '...'
+testImport:
+- package: github.com/matryer/silk
+  subpackages:
+  - runner
+- package: github.com/pebbe/util
+- package: gopkg.in/check.v1
