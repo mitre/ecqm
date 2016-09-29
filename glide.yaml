@@ -2,6 +2,7 @@ package: github.com/mitre/ecqm
 import:
 - package: github.com/gin-gonic/gin
 - package: github.com/intervention-engine/fhir
+  version: master
   subpackages:
   - auth
   - server
