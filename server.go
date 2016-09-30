@@ -51,8 +51,8 @@ func main() {
 		e.GET("/PatientReport/:id", controllers.ShowIndividualResultsForPatientHandler(db))
 		e.GET("/QualityReport/:id/PatientResults", controllers.ShowQualityReportPatientsHandler(db))
 
-		s.Engine.GET("/Measure/:id", controllers.ShowMeasureHandler(db))
-		e.GET("/Measure", controllers.IndexMeasureHandler(db))
+		s.Engine.GET("/CQMMeasure/:id", controllers.ShowMeasureHandler(db))
+		e.GET("/CQMMeasure", controllers.IndexMeasureHandler(db))
 		e.GET("/UserInfo", controllers.UserInfo)
 
 		ptmatch.Setup(e)
@@ -67,5 +67,5 @@ func main() {
 
 	s.AfterRoutes = append(s.AfterRoutes, ar)
 
-	s.Run(server.Config{Auth: authConfig, ServerURL: "http://localhost:3001"})
+	s.Run(server.Config{Auth: authConfig, ServerURL: "http://localhost:3001", DatabaseName: "fhir"})
 }

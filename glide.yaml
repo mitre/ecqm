@@ -2,7 +2,7 @@ package: github.com/mitre/ecqm
 import:
 - package: github.com/gin-gonic/gin
 - package: github.com/intervention-engine/fhir
-  version: master
+  version: stu3_aug2016
   subpackages:
   - auth
   - server
@@ -11,9 +11,6 @@ import:
   - bson
 - package: gopkg.in/validator.v2
 - package: github.com/mitre/ptmatch
-  version: glide
-  subpackages:
-  - '...'
 testImport:
 - package: github.com/matryer/silk
   subpackages:
