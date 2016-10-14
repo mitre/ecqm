@@ -1,5 +1,5 @@
 hash: ce6d4e126c06aaf75ec63b4d1265f129b8098be7ec31f467997202af9028484e
-updated: 2016-09-29T21:11:40.7313922-04:00
+updated: 2016-10-14T13:31:28.366124902-04:00
 imports:
 - name: github.com/boj/redistore
   version: fc113767cd6b051980f260d6dbe84b2740c46ab0
@@ -9,11 +9,11 @@ imports:
   - redis
   - internal
 - name: github.com/gin-gonic/contrib
-  version: 547e518040cfb96576b507d2f26779ab9c6fc829
+  version: cf28f84316e50a05a59d174b37c26ad9a43a1201
   subpackages:
   - sessions
 - name: github.com/gin-gonic/gin
-  version: f931d1ea80ae95a6fc739213cdd9399bd2967fb6
+  version: 7ec7df8b93bb50b786ba07b3ee04f44c1e1086e2
   subpackages:
   - binding
   - render
@@ -24,13 +24,13 @@ imports:
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/securecookie
-  version: c13558c2b1c44da35e0eb043053609a5ba3a1f19
+  version: fa5329f913702981df43dcb2a380bac429c810b5
 - name: github.com/gorilla/sessions
   version: ca9ada44574153444b00d3fd9c8559e4cc95f896
 - name: github.com/icrowley/fake
   version: 84bff6d01560fb0b5a396ba29534e93fd00d09c6
 - name: github.com/intervention-engine/fhir
-  version: ce9f0357f0949180254618e8441b3a857bd11e94
+  version: 96e6d03161c39507d3d836b48c0f3b35e9c3a455
   subpackages:
   - auth
   - server
@@ -66,15 +66,15 @@ imports:
   subpackages:
   - context
 - name: golang.org/x/oauth2
-  version: 3c3a985cb79f52a3190fbc056984415ca6763d01
+  version: 1e695b1c8febf17aad3bfa7bf0a819ef94b98ad5
   subpackages:
   - internal
 - name: golang.org/x/sys
-  version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
+  version: 9bb9f0998d48b31547d975974935ae9b48c7a03c
   subpackages:
   - unix
 - name: google.golang.org/appengine
-  version: 150dc57a1b433e64154302bdc40b6bb8aefa313a
+  version: 1177123117f15f0e04f58d3623a02e38ece70baa
   subpackages:
   - urlfetch
   - internal
@@ -108,7 +108,7 @@ testImports:
 - name: github.com/matryer/m
   version: 401319f8a9e15c8d8293d0c1af12beaa6895dfc0
 - name: github.com/matryer/silk
-  version: aa99d530214ba002a157b7909d7af230b1a1cee8
+  version: 11c4f5465bf617bd7ff879e7e243c9180ca35528
   subpackages:
   - runner
   - parse
