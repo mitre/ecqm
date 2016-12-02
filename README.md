@@ -33,30 +33,17 @@ cd $GOPATH/src/github.com/mitre
 git clone https://github.com/mitre/ecqm.git
 ```
 
-This project currently depends on resources from the
-[health-data-standards](https://github.com/projectcypress/health-data-standards)
-library to pull in measure bundles. The following should pull over enough of
-that library to get started:
-
-```
-cd ecqm
-gem install health-data-standards
-gem install highline
-rake bundle:download_and_install
-```
-
-This requires an NLM username and password to obtain a
-[Cypress bundle](http://projectcypress.org/test_data.html) which
-contains the measures.
-
 ## Running and Testing
 
-This project uses [Godep](https://github.com/tools/godep) to manage dependencies. All of the needed related
-libraries are included in the vendor directory.
+This project uses [Glide](https://github.com/Masterminds/glide) to manage dependencies. To get all of the
+dependencies needed run:
+
+    go get github.com/Masterminds/glide
+    glide install
 
 To run all of the tests for this project, run:
 
-    go test $(go list ./... | grep -v /vendor/)
+    go test $(glide novendor)
 
 in this directory.
 
@@ -67,6 +54,9 @@ To start the server, run:
 In this case, PATH_TO_ASSETS should be a location where a version of either the
 [eCQM Frontend](https://github.com/mitre/ecqm-frontend) or [Patient Match Frontend](https://github.com/mitre/ptmatch-frontend)
 has been built.
+
+It is also possible to use the -mongoHost argument to provide a hostname for the
+MongoDB server. If one is not provided, it defaults to localhost.
 
 ## HEART authentication and authorization:
 
