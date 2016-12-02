@@ -14,16 +14,16 @@ import (
 )
 
 func main() {
-
-	s := server.NewServer("localhost")
 	assetPath := flag.String("assets", "", "Path to static assets to host")
+	dbHostArg := flag.String("mongoHost", "localhost", "MongoDB server address, defaults to localhost")
 	jwkPath := flag.String("heartJWK", "", "Path the JWK for the HEART client")
 	clientID := flag.String("heartClientID", "", "Client ID registered with the OP")
 	opURL := flag.String("heartOP", "", "URL for the OpenID Provider")
 	sessionSecret := flag.String("secret", "", "Secret for the cookie session")
 	flag.Parse()
 
-	session, err := mgo.Dial("localhost")
+	s := server.NewServer(*dbHostArg)
+	session, err := mgo.Dial(*dbHostArg)
 	if err != nil {
 		panic(err)
 	}
